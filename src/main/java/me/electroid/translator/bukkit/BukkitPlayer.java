@@ -27,4 +27,8 @@ public class BukkitPlayer implements ServerPlayer {
         return null;
     }
 
+    @Override
+    public String getChatName() {
+        return player.getDisplayName();
+    }
 }

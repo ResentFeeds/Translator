@@ -18,9 +18,10 @@ public class iTranslateService implements TranslatorService {
     private static final String API_URL = "http://itranslate4.eu/api/Translate?auth=%s&src=%s&trg=%s&dat=%s";
 
     @Override
-    public void requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler) {
+    public TranslationRequest requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler) {
         TranslationRequest request = new TranslationRequest(message, fromLanguage, toLanguage, resultHandler);
         this.handleTranslationRequest(request);
+        return request;
     }
 
     private void handleTranslationRequest(TranslationRequest request) {

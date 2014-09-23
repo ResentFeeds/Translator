@@ -6,6 +6,11 @@ package me.electroid.translator;
  */
 public interface ServerPlayer {
     /**
+     * @return the player's name as shown in chat
+     */
+    public String getChatName();
+    
+    /**
      * Sends a message to the {@link ServerPlayer}
      * @param message the message to send
      */

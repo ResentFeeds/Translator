@@ -1,18 +1,21 @@
 package me.electroid.translator.translating;
 
+import java.util.Arrays;
+import java.util.List;
+
 import me.electroid.translator.translating.TranslatorService.TranslationResultHandler;
 
 public class TranslationRequest {
     private String message;
     private String sourceLanguage;
     private String targetLanguage;
-    private TranslationResultHandler resultHandler;
+    private List<TranslationResultHandler> resultHandlers;
     
     public TranslationRequest(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler) {
         this.message = message;
         this.sourceLanguage = fromLanguage;
         this.targetLanguage = toLanguage;
-        this.resultHandler = resultHandler;
+        this.resultHandlers = Arrays.asList(resultHandler);
     }
     
     /**
@@ -20,7 +23,16 @@ public class TranslationRequest {
      * @param translatedText
      */
     public void invokeHandler(String translatedText) {
-        this.resultHandler.handleTranslationResult(message, sourceLanguage, targetLanguage, translatedText);
+        for (TranslationResultHandler r : resultHandlers)
+            r.handleTranslationResult(message, sourceLanguage, targetLanguage, translatedText);
+    }
+    
+    /**
+     * Adds a result handler to the TranslationRequest
+     * @param resH
+     */
+    public void addResultHandler(TranslationResultHandler resH) {
+        resultHandlers.add(resH);
     }
 
     /**

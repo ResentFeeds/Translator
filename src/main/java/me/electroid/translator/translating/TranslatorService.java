@@ -12,7 +12,7 @@ public interface TranslatorService {
      * @param toLanguage the language that the message should be converted to
      * @param resultHandler the function that should be ran once a translation is complete
      */
-    public void requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler);
+    public TranslationRequest requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler);
     
     public interface TranslationResultHandler {
         /**
