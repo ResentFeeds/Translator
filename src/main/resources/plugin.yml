@@ -1,0 +1,4 @@
+name: Translator
+main: me.electroid.translator.Translator
+version: 0.0.1
+author: molenzwiebel
