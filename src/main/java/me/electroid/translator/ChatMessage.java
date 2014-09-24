@@ -25,6 +25,8 @@ public class ChatMessage {
         this.originalMessage = msg;
         this.originalLanguage = originalLanguage;
         this.sender = sender;
+        
+        this.translations.put(originalLanguage, originalMessage);
     }
     
     public void translateFor(final ServerPlayer player, final String messageFormat) {

@@ -2,6 +2,7 @@ package me.electroid.translator;
 
 import java.util.HashMap;
 
+import me.electroid.translator.services.GoogleTranslateService;
 import me.electroid.translator.services.iTranslateService;
 import me.electroid.translator.translating.TranslatorService;
 
@@ -17,6 +18,7 @@ public class Translator {
         translatorServices = Maps.newHashMap();
 
         translatorServices.put("itranslate", iTranslateService.class);
+        translatorServices.put("googletranslate", GoogleTranslateService.class);
     }
 
     private static Translator instance;
