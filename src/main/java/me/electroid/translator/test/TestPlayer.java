@@ -13,7 +13,7 @@ public class TestPlayer implements ServerPlayer {
 
     @Override
     public void sendMessage(String message) {
-        System.out.println("(Server -> "+name+"): "+message);
+        System.out.println("["+System.currentTimeMillis()+"] (Server -> "+name+"): "+message);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package me.electroid.translator.translating;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class TranslationRequest {
         this.message = message;
         this.sourceLanguage = fromLanguage;
         this.targetLanguage = toLanguage;
-        this.resultHandlers = Arrays.asList(resultHandler);
+        this.resultHandlers = new ArrayList<TranslationResultHandler>(Arrays.asList(resultHandler));
     }
     
     /**

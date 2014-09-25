@@ -1,4 +1,4 @@
 name: Translator
-main: me.electroid.translator.Translator
+main: me.electroid.translator.bukkit.BukkitTranslatorPlugin
 version: 0.0.1
 author: molenzwiebel

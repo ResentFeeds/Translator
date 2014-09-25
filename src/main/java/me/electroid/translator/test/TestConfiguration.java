@@ -8,6 +8,10 @@ public class TestConfiguration implements ConfigurationProvider {
         switch (path) {
         case "translator":
             return "googletranslate";
+        case "message-format":
+            return "<%s> %s";
+        case "enabled":
+            return "true";
         default:
             return null;
         }

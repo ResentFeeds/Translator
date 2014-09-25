@@ -1,0 +1,3 @@
+translator: "googletranslate"
+message-format: "<%s> %s"
+enabled: "true"

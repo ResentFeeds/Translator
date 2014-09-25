@@ -18,8 +18,16 @@ public class GoogleTranslateService implements TranslatorService {
 
     @Override
     public TranslationRequest requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler) {
-        TranslationRequest request = new TranslationRequest(message, fromLanguage, toLanguage, resultHandler);
-        this.handleTranslationRequest(request);
+        final TranslationRequest request = new TranslationRequest(message, fromLanguage, toLanguage, resultHandler);
+        
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                handleTranslationRequest(request);
+            }
+        };
+        new Thread(r).start();
+        
         return request;
     }
 

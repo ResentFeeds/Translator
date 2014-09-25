@@ -19,8 +19,16 @@ public class iTranslateService implements TranslatorService {
 
     @Override
     public TranslationRequest requestTranslation(String message, String fromLanguage, String toLanguage, TranslationResultHandler resultHandler) {
-        TranslationRequest request = new TranslationRequest(message, fromLanguage, toLanguage, resultHandler);
-        this.handleTranslationRequest(request);
+        final TranslationRequest request = new TranslationRequest(message, fromLanguage, toLanguage, resultHandler);
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                handleTranslationRequest(request);
+            }
+        };
+        new Thread(r).start();
+        
         return request;
     }
 
@@ -28,22 +36,22 @@ public class iTranslateService implements TranslatorService {
         try {
             URL requestUrl = new URL(String.format(API_URL, getAuthKey(), request.getSourceLanguage(), request.getTargetLanguage(), request.getMessage().replace(" ", "+")));
             HttpURLConnection con = (HttpURLConnection) requestUrl.openConnection();
-            
+
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
             while ((inputLine = in.readLine()) != null) response.append(inputLine);
             in.close();
-            
+
             JsonObject resultRoot = new JsonParser().parse(response.toString()).getAsJsonObject();
             JsonArray translations = resultRoot.getAsJsonArray("dat");
-            
+
             StringBuilder translation = new StringBuilder();
             for (JsonElement e : translations) {
                 JsonArray lines = e.getAsJsonObject().getAsJsonArray("text");
                 for (JsonElement line : lines) translation.append(line.getAsString()).append("\n");
             }
-            
+
             request.invokeHandler(translation.substring(0, translation.length()-2)); //Strip last \n
         } catch (Exception e) {
             e.printStackTrace();

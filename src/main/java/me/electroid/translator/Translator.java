@@ -50,6 +50,15 @@ public class Translator {
     public void onDisable() {
         instance = null;
     }
+    
+    /**
+     * Handles the actual chat
+     */
+    public void onChat(ChatEvent e) {
+        if (Boolean.parseBoolean(getPlatform().getConfiguration().getString("enabled"))) {
+            e.translateAll();
+        }
+    }
 
     /**
      * Gets the current {@link Translator} instance.
