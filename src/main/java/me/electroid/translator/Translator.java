@@ -1,11 +1,13 @@
 package me.electroid.translator;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import me.electroid.translator.services.GoogleTranslateService;
 import me.electroid.translator.services.iTranslateService;
 import me.electroid.translator.translating.TranslatorService;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 
 /**
@@ -82,5 +84,16 @@ public class Translator {
      */
     public TranslatorService getTranslator() {
         return translator;
+    }
+    
+    /**
+     * Generates JSON for a hover message. Helping method
+     */
+    public static String generateHoverJSON(String text, String... hoverText) {
+        StringBuilder retval = new StringBuilder();
+        retval.append("{text:\""+text+"\",hoverEvent:{action:show_text,value:{text:\"");
+        retval.append(Joiner.on("\n").join(hoverText));
+        retval.append("\"}}}");
+        return retval.toString();
     }
 }

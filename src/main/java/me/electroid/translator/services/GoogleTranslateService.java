@@ -49,7 +49,7 @@ public class GoogleTranslateService implements TranslatorService {
             for (JsonElement sentence : sentences) {
                 translation.append(sentence.getAsJsonObject().getAsJsonPrimitive("trans").getAsString()).append("\n");
             }            
-            request.invokeHandler(translation.substring(0, translation.length()-2)); //Strip last \n
+            request.invokeHandler(translation.substring(0, translation.length()-1)); //Strip last \n
         } catch (Exception e) {
             e.printStackTrace();
             request.invokeHandler("Unable to translate: "+e.getMessage());

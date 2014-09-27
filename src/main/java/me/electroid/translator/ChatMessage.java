@@ -3,6 +3,8 @@ package me.electroid.translator;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+
 import me.electroid.translator.translating.TranslationRequest;
 import me.electroid.translator.translating.TranslatorService.TranslationResultHandler;
 
@@ -58,8 +60,9 @@ public class ChatMessage {
     }
     
     private void sendTranslatedMessage(ServerPlayer to, String format, String translation) {
-        String messageToSend = String.format(format, sender.getChatName(), translation);
-        to.sendRawMessage(messageToSend);
+        String messageToSend = String.format(format, sender.getChatName(), ChatColor.ITALIC+translation);
+        String json = Translator.generateHoverJSON(messageToSend, ChatColor.AQUA+"Translated from "+ChatColor.GOLD+originalLanguage+ChatColor.AQUA+" to "+ChatColor.GOLD+to.getLocale(), ChatColor.GRAY+originalMessage);
+        to.sendRawMessage(json);
     }
     
     private TranslationRequest getPendingRequest(String lang) {
